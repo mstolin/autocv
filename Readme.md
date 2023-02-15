@@ -13,7 +13,7 @@ It was inspired by other CV projects;
 
 The template is based on a modified version of 
 [FAANGPath Simple Template](https://www.overleaf.com/latex/templates/faangpath-simple-template/npsfpdqnxmbc)
-by [FAANGPath](www.faangpath.com).
+by [FAANGPath](https://www.faangpath.com).
 
 # License
 
