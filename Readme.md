@@ -46,30 +46,30 @@ sections:
           - "Current Grade: ..."
           - "Relevant Coursework: ..."
         style: "experience"
-    - title: "Recent Work Experience"
-      data:
-        - title: "Fraunhofer IPA"
-          subtitle: "Research Assistant"
-          place: "Stuttgart, Germany"
-          date: "Sep 2020 - Jun 2021"
-          text:
-            - "I achieved this by doing that"
-            - "..."
-          style: "experience"
-    - title: "Skills"
-      data:
-        - title: "Programming Languages:"
-          text: "Rust, Go, Java"
-          style: "skills"
-    - title: "Projects"
-      data:
-        - title: "Super cool project"
-          date: "2023"
-          text: "I did a lot of cool stuff and learned a lot as well."
-          link:
-            text: "(Available at github.com/mstolin/Auto-CV)"
-            url: "https://github.com/mstolin/Auto-CV"
-          style: "paragraph"
+  - title: "Recent Work Experience"
+    data:
+      - title: "Fraunhofer IPA"
+        subtitle: "Research Assistant"
+        place: "Stuttgart, Germany"
+        date: "Sep 2020 - Jun 2021"
+        text:
+          - "I achieved this by doing that"
+          - "..."
+        style: "experience"
+  - title: "Skills"
+    data:
+      - title: "Programming Languages:"
+        text: "Rust, Go, Java"
+        style: "skills"
+  - title: "Projects"
+    data:
+      - title: "Super cool project"
+        date: "2023"
+        text: "I did a lot of cool stuff and learned a lot as well."
+        link:
+          text: "(Available at github.com/mstolin/Auto-CV)"
+          url: "https://github.com/mstolin/Auto-CV"
+        style: "paragraph"
 ```
 
 The data structure follows a couple of rules.
