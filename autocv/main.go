@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/aymerick/raymond"
 	"gopkg.in/yaml.v3"
 )
 
@@ -140,10 +141,17 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Write latex document
-	outputFile, err := writeOutput(template, *outputPath)
+	// Parse template
+	renderedTemplate, err := raymond.Render(string(template), templateData)
 	if err != nil {
 		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	// Write latex document
+	outputFile, err := writeOutput([]byte(renderedTemplate), *outputPath)
+	if err != nil {
+		fmt.Println("Unable to render given template.")
 		os.Exit(1)
 	}
 	fmt.Printf("Successfully wrote to file '%s'.", outputFile)
