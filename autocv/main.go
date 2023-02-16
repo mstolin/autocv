@@ -7,7 +7,15 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+
+	"gopkg.in/yaml.v3"
 )
+
+type TemplateData struct {
+	Filename  string
+	Filetitle string
+	Title     string
+}
 
 // Reads a file from the given path.
 func readFile(path string) ([]byte, error) {
@@ -64,7 +72,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	_, err := readFile(*dataPath)
+	data, err := readFile(*dataPath)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -77,6 +85,13 @@ func main() {
 		os.Exit(1)
 	}
 	fmt.Printf("Successfully red template from '%s'.\n", *templatePath)
+
+	templateData := TemplateData{}
+	if err := yaml.Unmarshal(data, &templateData); err != nil {
+		fmt.Printf("Unable to read data file '%s'.\n", *dataPath)
+		os.Exit(1)
+	}
+	fmt.Printf("FILENAME: %s, FILETITLE: %s, TITLE: %s\n", templateData.Filename, templateData.Filetitle, templateData.Title)
 
 	outputFile, err := writeOutput(template, *outputPath)
 	if err != nil {
