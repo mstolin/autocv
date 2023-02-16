@@ -80,7 +80,7 @@ func readFile(path string) ([]byte, error) {
 }
 
 // Write the data to the given path.
-func writeOutput(data []byte, path string) (string, error) {
+func writeOutput(data []byte, path, filename string) (string, error) {
 	fileInfo, err := os.Stat(path)
 	if err != nil {
 		if errors.Is(err, os.ErrNotExist) {
@@ -93,7 +93,7 @@ func writeOutput(data []byte, path string) (string, error) {
 		return "", fmt.Errorf("path '%s' is not a directory", path)
 	}
 
-	outputFile := filepath.Join(path, "output.txt")
+	outputFile := filepath.Join(path, fmt.Sprintf("%s.tex", filename))
 	if err := ioutil.WriteFile(outputFile, data, 0644); err != nil {
 		return "", fmt.Errorf("could not write output to path '%s'", path)
 	}
@@ -149,7 +149,7 @@ func main() {
 	}
 
 	// Write latex document
-	outputFile, err := writeOutput([]byte(renderedTemplate), *outputPath)
+	outputFile, err := writeOutput([]byte(renderedTemplate), *outputPath, templateData.Filename)
 	if err != nil {
 		fmt.Println("Unable to render given template.")
 		os.Exit(1)
