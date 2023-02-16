@@ -11,10 +11,31 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+type Link struct {
+	Text string
+	Url  string
+}
+
+type Data struct {
+	Title    string
+	Subtitle string
+	Date     string
+	Text     string
+	Style    string
+	Link     Link
+}
+
+type Section struct {
+	Title string
+	Data  []Data
+}
+
 type TemplateData struct {
-	Filename  string
-	Filetitle string
-	Title     string
+	Filename    string
+	Filetitle   string
+	Title       string
+	Information []Link
+	Sections    []Section
 }
 
 // Reads a file from the given path.
