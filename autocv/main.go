@@ -20,7 +20,7 @@ type Data struct {
 	Title    string
 	Subtitle string
 	Date     string
-	Text     string
+	Text     StringArray
 	Style    string
 	Link     Link
 }
@@ -36,6 +36,25 @@ type TemplateData struct {
 	Title       string
 	Information []Link
 	Sections    []Section
+}
+
+// See https://github.com/go-yaml/yaml/issues/100#issuecomment-901604971
+type StringArray []string
+
+func (a *StringArray) UnmarshalYAML(value *yaml.Node) error {
+	var multi []string
+	err := value.Decode(&multi)
+	if err != nil {
+		var single string
+		err := value.Decode(&single)
+		if err != nil {
+			return err
+		}
+		*a = []string{single}
+	} else {
+		*a = multi
+	}
+	return nil
 }
 
 // Reads a file from the given path.
@@ -82,6 +101,7 @@ func writeOutput(data []byte, path string) (string, error) {
 }
 
 func main() {
+	// required CLI flags
 	dataPath := flag.String("data", "", "Path to the data file.")
 	templatePath := flag.String("template", "", "Path to the template file.")
 	outputPath := flag.String("output", "", "Output path.")
@@ -93,6 +113,7 @@ func main() {
 		os.Exit(1)
 	}
 
+	// read YAML data
 	data, err := readFile(*dataPath)
 	if err != nil {
 		fmt.Println(err)
@@ -100,6 +121,7 @@ func main() {
 	}
 	fmt.Printf("Successfully red data from '%s'.\n", *dataPath)
 
+	// read handlebars template
 	template, err := readFile(*templatePath)
 	if err != nil {
 		fmt.Println(err)
@@ -107,13 +129,18 @@ func main() {
 	}
 	fmt.Printf("Successfully red template from '%s'.\n", *templatePath)
 
+	// Unmarshal yaml data
 	templateData := TemplateData{}
 	if err := yaml.Unmarshal(data, &templateData); err != nil {
 		fmt.Printf("Unable to read data file '%s'.\n", *dataPath)
 		os.Exit(1)
 	}
-	fmt.Printf("FILENAME: %s, FILETITLE: %s, TITLE: %s\n", templateData.Filename, templateData.Filetitle, templateData.Title)
+	if templateData.Filename == "" {
+		fmt.Println("The property filename must be set.")
+		os.Exit(1)
+	}
 
+	// Write latex document
 	outputFile, err := writeOutput(template, *outputPath)
 	if err != nil {
 		fmt.Println(err)
