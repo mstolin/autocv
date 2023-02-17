@@ -7,8 +7,8 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"text/template"
 
-	"github.com/aymerick/raymond"
 	"gopkg.in/yaml.v3"
 )
 
@@ -79,26 +79,38 @@ func readFile(path string) ([]byte, error) {
 	return data, nil
 }
 
-// Write the data to the given path.
-func writeOutput(data []byte, path, filename string) (string, error) {
-	fileInfo, err := os.Stat(path)
+/// Renders the given data into the template
+func renderTemplate(templatePath, destination string, data TemplateData) error {
+	template, err := template.ParseFiles(templatePath)
+	if err != nil {
+		return err
+	}
+	outputFile, err := os.Create(destination)
+	if err != nil {
+		return err
+	}
+	if err := template.Execute(outputFile, data); err != nil {
+		return err
+	}
+	outputFile.Close()
+	return nil
+}
+
+/// Generates the destination file for the tex document
+func genDestinationPath(destDir, filename string) (string, error) {
+	fileInfo, err := os.Stat(destDir)
 	if err != nil {
 		if errors.Is(err, os.ErrNotExist) {
-			return "", fmt.Errorf("path '%s' does not exist", path)
+			return "", fmt.Errorf("path '%s' does not exist", destDir)
 		} else {
-			return "", fmt.Errorf("invalid path '%s'", path)
+			return "", fmt.Errorf("invalid path '%s'", destDir)
 		}
 	}
 	if !fileInfo.IsDir() {
-		return "", fmt.Errorf("path '%s' is not a directory", path)
+		return "", fmt.Errorf("path '%s' is not a directory", destDir)
 	}
 
-	outputFile := filepath.Join(path, fmt.Sprintf("%s.tex", filename))
-	if err := ioutil.WriteFile(outputFile, data, 0644); err != nil {
-		return "", fmt.Errorf("could not write output to path '%s'", path)
-	}
-
-	return outputFile, nil
+	return filepath.Join(destDir, fmt.Sprintf("%s.tex", filename)), err
 }
 
 func main() {
@@ -120,15 +132,6 @@ func main() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	fmt.Printf("Successfully red data from '%s'.\n", *dataPath)
-
-	// read handlebars template
-	template, err := readFile(*templatePath)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	fmt.Printf("Successfully red template from '%s'.\n", *templatePath)
 
 	// Unmarshal yaml data
 	templateData := TemplateData{}
@@ -142,17 +145,15 @@ func main() {
 	}
 
 	// Parse template
-	renderedTemplate, err := raymond.Render(string(template), templateData)
+	destination, err := genDestinationPath(*outputPath, templateData.Filename)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 
 	// Write latex document
-	outputFile, err := writeOutput([]byte(renderedTemplate), *outputPath, templateData.Filename)
-	if err != nil {
-		fmt.Println("Unable to render given template.")
+	if err := renderTemplate(*templatePath, destination, templateData); err != nil {
+		fmt.Println(err)
 		os.Exit(1)
 	}
-	fmt.Printf("Successfully wrote to file '%s'.", outputFile)
 }
