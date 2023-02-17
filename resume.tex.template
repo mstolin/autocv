@@ -3,7 +3,9 @@
 \newcommand{\tab}[1]{\hspace{.2667\textwidth}\rlap{#1}} 
 \newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
 {{if .Title}}\name{ {{.Title}} }{{end}}
-{{range .Information}}\address{ {{if .Text}}{{.Text}}{{end}} }{{end}}
+{{range .Information}}
+\address{ {{if .Text}}{{.Text}}{{end}} }
+{{end}}
 \begin{document}
 
 {{range .Sections}}
