@@ -45,6 +45,6 @@ jobs:
           working_directory: ${{ env.DIR }}
       - name: Upload PDF as artifact
         uses: actions/upload-artifact@v3
-          with:
-            name: CV
-            path: ./*.pdf
+        with:
+          name: CV
+          path: ./*.pdf
