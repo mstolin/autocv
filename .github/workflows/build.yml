@@ -23,6 +23,8 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: autocv
+      - name: Make autocv executable
+        run: chmod +x ./autocv
       - name: Create .tex file
         run: ./autocv --data ./data.json --template ./resume.tex.template --output .
       - name: Upload latex document as artifact
