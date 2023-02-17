@@ -22,7 +22,7 @@ type Data struct {
 	Subtitle string
 	Date     string
 	Text     StringArray
-	Style    string
+	Layout   string
 	Link     Link
 }
 

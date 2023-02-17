@@ -45,7 +45,7 @@ sections:
         text:
           - "Current Grade: ..."
           - "Relevant Coursework: ..."
-        style: "experience"
+        layout: "experience"
   - title: "Recent Work Experience"
     data:
       - title: "Fraunhofer IPA"
@@ -55,12 +55,12 @@ sections:
         text:
           - "I achieved this by doing that"
           - "..."
-        style: "experience"
+        layout: "experience"
   - title: "Skills"
     data:
       - title: "Programming Languages:"
         text: "Rust, Go, Java"
-        style: "skills"
+        layout: "skill"
   - title: "Projects"
     data:
       - title: "Super cool project"
@@ -69,7 +69,7 @@ sections:
         link:
           text: "(Available at github.com/mstolin/Auto-CV)"
           url: "https://github.com/mstolin/Auto-CV"
-        style: "paragraph"
+        layout: "paragraph"
 ```
 
 The data structure follows a couple of rules.
