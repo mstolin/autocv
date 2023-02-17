@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
@@ -8,8 +9,6 @@ import (
 	"os"
 	"path/filepath"
 	"text/template"
-
-	"gopkg.in/yaml.v3"
 )
 
 type Link struct {
@@ -21,7 +20,7 @@ type Data struct {
 	Title    string
 	Subtitle string
 	Date     string
-	Text     StringArray
+	Text     []string
 	Layout   string
 	Link     Link
 }
@@ -37,25 +36,6 @@ type TemplateData struct {
 	Title       string
 	Information []Link
 	Sections    []Section
-}
-
-// See https://github.com/go-yaml/yaml/issues/100#issuecomment-901604971
-type StringArray []string
-
-func (a *StringArray) UnmarshalYAML(value *yaml.Node) error {
-	var multi []string
-	err := value.Decode(&multi)
-	if err != nil {
-		var single string
-		err := value.Decode(&single)
-		if err != nil {
-			return err
-		}
-		*a = []string{single}
-	} else {
-		*a = multi
-	}
-	return nil
 }
 
 // Reads a file from the given path.
@@ -109,7 +89,6 @@ func genDestinationPath(destDir, filename string) (string, error) {
 	if !fileInfo.IsDir() {
 		return "", fmt.Errorf("path '%s' is not a directory", destDir)
 	}
-
 	return filepath.Join(destDir, fmt.Sprintf("%s.tex", filename)), err
 }
 
@@ -133,10 +112,10 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Unmarshal yaml data
-	templateData := TemplateData{}
-	if err := yaml.Unmarshal(data, &templateData); err != nil {
-		fmt.Printf("Unable to read data file '%s'.\n", *dataPath)
+	// Unmarshal json data
+	var templateData TemplateData
+	if err := json.Unmarshal(data, &templateData); err != nil {
+		fmt.Println(err)
 		os.Exit(1)
 	}
 	if templateData.Filename == "" {
