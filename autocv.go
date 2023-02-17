@@ -19,6 +19,7 @@ type Link struct {
 type Data struct {
 	Title    string
 	Subtitle string
+	Location string
 	Date     string
 	Text     []string
 	Layout   string
