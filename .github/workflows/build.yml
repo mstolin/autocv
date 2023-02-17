@@ -46,7 +46,7 @@ jobs:
         uses: dante-ev/latex-action@latest
         with:
           root_file: CV-short.tex
-          working_directory: ${{ env.DIR }}
+          compiler: pdflatex
       - name: Upload PDF as artifact
         uses: actions/upload-artifact@v3
         with:
