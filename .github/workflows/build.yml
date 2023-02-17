@@ -15,6 +15,7 @@ jobs:
             path: ./autocv
   create-tex-doc:
     runs-on: ubuntu-latest
+    needs: build-cli
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -33,6 +34,7 @@ jobs:
             ./resume.cls
   render-pdf:
     runs-on: ubuntu-latest
+    needs: create-tex-doc
     steps:
       - name: Download latex-documents artifacts
         uses: actions/download-artifact@v3
