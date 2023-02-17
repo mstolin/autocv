@@ -1,0 +1,50 @@
+name: build
+on: [push]
+jobs:
+  build-cli:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout repository
+          uses: actions/checkout@v3
+        - name: Build autocv
+          run: go build autocv.go -o ./autocv
+        - name: Upload binary as artificat
+          uses: actions/upload-artifact@v3
+          with:
+            name: autocv
+            path: ./autocv
+  create-tex-doc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download autocv binary artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: autocv
+      - name: Create .tex file
+        run: ./autocv --data ./data.json --template ./resume.tex.template --output .
+      - name: Upload latex document as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: latex-documents
+          path: |
+            ./*.tex
+            ./resume.cls
+  render-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download latex-documents artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: latex-documents
+      - name: Build PDF file
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: CV-short.tex
+          working_directory: ${{ env.DIR }}
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@v3
+          with:
+            name: CV
+            path: ./*.pdf
