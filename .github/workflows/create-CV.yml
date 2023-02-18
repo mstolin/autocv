@@ -49,6 +49,8 @@ jobs:
         with:
           root_file: CV-short.tex
           compiler: pdflatex
+      - name: Remove latex documents
+        run: rm -rf resume.cls CV-short.text
       #- name: Upload PDF as artifact
       #  uses: actions/upload-artifact@v3
       #  with:
@@ -57,7 +59,7 @@ jobs:
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./CV-short.pdf
+          path: '.'
   deploy-gh:
     runs-on: ubuntu-latest
     needs: render-pdf
