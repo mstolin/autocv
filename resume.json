@@ -4,12 +4,12 @@
     "title": "Marcel Stolin",
     "information": [
         {
-            "text": "LinkedIn",
-            "url": "..."
+            "text": "linkedin.com/in/marcelstolin",
+            "url": "https://linkedin.com/in/marcelstolin"
         },
         {
-            "text": "Github",
-            "url": "..."
+            "text": "github.com/mstolin",
+            "url": "https://github.com/mstolin"
         }
     ],
     "sections": [
@@ -21,8 +21,18 @@
                     "subtitle": "University of Trento",
                     "date": "2021 - 2023 (expected)",
                     "text": [
-                        "Current Grade: ...",
-                        "Relevant Coursework: ..."
+                        "Current Grade: 29.25 out of 30.0",
+                        "Relevant Coursework: Advanced Programming, Autonomous Software Agents, Distributed Systems 1, Security Testing, Service Design and Engineering, Web Architectures"
+                    ],
+                    "layout": "experience"
+                },
+                {
+                    "title": "Bachelor of Science, Mobile Media",
+                    "subtitle": "Stuttgart Media Universityo",
+                    "date": "2016 - 2021",
+                    "text": [
+                        "Final Grade: 2.0 out of 6.0 (best possible grade: 1.0)",
+                        "Relevant Coursework: Advanced Programming in C++, Algorithms and Data Structures, Artificial Intelligence, Database Systems 1, Functional Programming, Software Development 1 + 2, Web Development 1 + 2"
                     ],
                     "layout": "experience"
                 }
@@ -37,8 +47,30 @@
                     "location": "Stuttgart, Germany",
                     "date": "Sep 2020 - Jun 2021",
                     "text": [
-                        "I achieved this by doing that",
-                        "..."
+                        "Bachelor Thesis: \\textit{Automated Deployment of Machine Learning Applications on a Scalable Heterogeneous GPU-Accelerated Apache Spark Cluster}",
+                        "Researched high performance computing clusters for machine learning"
+                    ],
+                    "layout": "experience"
+                },
+                {
+                    "title": "Data Engineer (Internship and Working Student)",
+                    "subtitle": "Robert Bosch GmbH, Bosch Center for Artificial Intelligence",
+                    "location": "Renningen, Germany",
+                    "date": "May 2019 - Sep 2020",
+                    "text": [
+                        "Built an automated CI/CD pipeline to publish Big Data applications on a Microsoft Azure cloud environment",
+                        "Developed ETL pipelines using Apache Kafka"
+                    ],
+                    "layout": "experience"
+                },
+                {
+                    "title": "Data Engineer (Internship)",
+                    "subtitle": "Robert Bosch LLC, Bosch Center for Artificial Intelligence",
+                    "location": "Sunnyvale, CA, USA",
+                    "date": "Oct 2018 - Mar 2019",
+                    "text": [
+                        "Added sanity checks to the CI/CD pipelines of Big Data applications",
+                        "Increased the build-time of a Big Data platform multi-module Scala project by 30\\%"
                     ],
                     "layout": "experience"
                 }
@@ -51,6 +83,21 @@
                     "title": "Programming Languages:",
                     "text": ["Rust, Go, Java"],
                     "layout": "skill"
+                },
+                {
+                    "title": "Tools:",
+                    "text": ["Ansible, Docker, Packer, Podman, Terraform"],
+                    "layout": "skill"
+                },
+                {
+                    "title": "Languages:",
+                    "text": ["German (native language), English (C1), Italian (A1b)"],
+                    "layout": "skill"
+                },
+                {
+                    "title": "Certificates:",
+                    "text": ["Introduction to DevOps and Site Reliability Engineering (edX)", "Machine Learning Engineer Nanodegree (Udacity)"],
+                    "layout": "skill"
                 }
             ]
         },
@@ -58,12 +105,22 @@
             "title": "Projects",
             "data": [
                 {
-                    "title": "Super cool project",
+                    "title": "Computing within Limits 2022 (Conference)",
                     "date": "2023",
-                    "text": ["I did a lot of cool stuff and learned a lot as well."],
+                    "text": ["Co-authored \\textit{Conceptualising Resources-aware Higher Education Digital Infrastructure through Self-hosting: a Multi-disciplinary View} where I researched cloud technologies with a low energy-footprint."],
                     "link": {
-                        "text": "(Available at github.com/mstolin/Auto-CV)",
-                        "url": "https://github.com/mstolin/Auto-CV"
+                        "text": "(Available at computingwithinlimits.org/2022/papers/limits22-final-Angeli.pdf)",
+                        "url": "https://computingwithinlimits.org/2022/papers/limits22-final-Angeli.pdf"
+                    },
+                    "layout": "paragraph"
+                },
+                {
+                    "title": "Wishlist Inviter (Course Project)",
+                    "date": "2023",
+                    "text": ["Built a web application in Go and Python using the microservice architecture, that scraps Amazon wishlists."],
+                    "link": {
+                        "text": "(Available at github.com/mstolin/wishlist-inviter)",
+                        "url": "https://github.com/mstolin/wishlist-inviter"
                     },
                     "layout": "paragraph"
                 }
