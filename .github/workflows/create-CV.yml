@@ -19,17 +19,22 @@ jobs:
             ./resume.cls
   render-pdf:
     runs-on: ubuntu-latest
+    container: danteev/texlive:latest
     needs: create-tex-doc
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
       - name: Download latex-documents artifacts
         uses: actions/download-artifact@v3
         with:
           name: latex-documents
-      - name: Build PDF file
-        uses: dante-ev/latex-action@latest
-        with:
-          root_file: CV-short.tex
-          compiler: pdflatex
+      #- name: Build PDF file
+      #  uses: dante-ev/latex-action@latest
+      #  with:
+      #    root_file: CV-short.tex
+      #    compiler: pdflatex
+      - name: Compile pdf files
+        run: ./publish-all.sh
       - name: Move all PDF files to _site
         run: mkdir _site && mv *.pdf _site/
       - name: Upload pages artifact
