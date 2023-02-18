@@ -28,11 +28,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: latex-documents
-      #- name: Build PDF file
-      #  uses: dante-ev/latex-action@latest
-      #  with:
-      #    root_file: CV-short.tex
-      #    compiler: pdflatex
       - name: Compile pdf files
         run: ./publish-all.sh
       - name: Move all PDF files to _site
