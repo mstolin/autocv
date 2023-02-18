@@ -30,8 +30,8 @@ jobs:
         with:
           root_file: CV-short.tex
           compiler: pdflatex
-      - name: Move all PDF file to a static folder
-        run: mkdir _static && mv *.pdf _static/
+      - name: Move all PDF files to a static folder
+        run: mkdir _site && mv *.pdf _site/
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v1
   deploy-gh:
