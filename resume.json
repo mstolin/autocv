@@ -22,17 +22,17 @@
                     "date": "2021 - 2023 (expected)",
                     "text": [
                         "Current Grade: 29.25 out of 30.0",
-                        "Relevant Coursework: Advanced Programming, Autonomous Software Agents, Distributed Systems 1, Security Testing, Service Design and Engineering, Web Architectures"
+                        "Relevant Coursework: Advanced Programming, Autonomous Software Agents, Distributed Systems 1,\\\\ Security Testing, Service Design and Engineering, Web Architectures"
                     ],
                     "layout": "experience"
                 },
                 {
                     "title": "Bachelor of Science, Mobile Media",
-                    "subtitle": "Stuttgart Media Universityo",
+                    "subtitle": "Stuttgart Media University",
                     "date": "2016 - 2021",
                     "text": [
                         "Final Grade: 2.0 out of 6.0 (best possible grade: 1.0)",
-                        "Relevant Coursework: Advanced Programming in C++, Algorithms and Data Structures, Artificial Intelligence, Database Systems 1, Functional Programming, Software Development 1 + 2, Web Development 1 + 2"
+                        "Relevant Coursework: Advanced Programming in C++, Algorithms and Data Structures, Artificial Intelligence, Database Systems 1, Functional Programming, Software Development 1 + 2,\\\\ Web Development 1 + 2"
                     ],
                     "layout": "experience"
                 }
