@@ -3,32 +3,32 @@ on:
   push:
     branches: [main]
 jobs:
-  build-cli:
-    runs-on: ubuntu-latest
-    steps:
-        - name: Checkout repository
-          uses: actions/checkout@v3
-        - name: Build autocv
-          run: go build -o autocv ./autocv.go
-        - name: Upload binary as artificat
-          uses: actions/upload-artifact@v3
-          with:
-            name: autocv
-            path: ./autocv
+  #build-cli:
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #      - name: Checkout repository
+  #        uses: actions/checkout@v3
+  #      - name: Build autocv
+  #        run: go build -o autocv ./autocv.go
+  #      - name: Upload binary as artificat
+  #        uses: actions/upload-artifact@v3
+  #        with:
+  #          name: autocv
+  #          path: ./autocv
   create-tex-doc:
     runs-on: ubuntu-latest
     needs: build-cli
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Download autocv binary artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: autocv
-      - name: Make autocv executable
-        run: chmod +x ./autocv
+      #- name: Download autocv binary artifact
+      #  uses: actions/download-artifact@v3
+      #  with:
+      #    name: autocv
+      #- name: Make autocv executable
+      #  run: chmod +x ./autocv
       - name: Create .tex file
-        run: ./autocv --data ./data.json --template ./resume.tex.template --output .
+        run: go run autocv.go --data ./data.json --template ./resume.tex.template --output .
       - name: Upload latex document as artifact
         uses: actions/upload-artifact@v3
         with:
@@ -50,12 +50,7 @@ jobs:
           root_file: CV-short.tex
           compiler: pdflatex
       - name: Remove latex documents
-        run: rm -rf resume.cls CV-short.text
-      #- name: Upload PDF as artifact
-      #  uses: actions/upload-artifact@v3
-      #  with:
-      #    name: github-pages
-      #    path: ./*.pdf
+        run: rm -rf *.cls *.tex
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v1
         with:
@@ -70,20 +65,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      #- name: Download github-pages artifact
-      #  uses: actions/download-artifact@v3
-      #  with:
-      #    name: github-pages
-      #    path: ./github-pages
-      #- name: Publish to GitHub Pages
-      #  uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
-      #  with:
-      #    dir: ./github-pages
-      #    branch: github-pages
-      #    token: ${{ secrets.ACCESS_TOKEN }}
-      #- name: Deploy to GitHub Pages
-      #  id: deployment
-      #  uses: actions/deploy-pages@v1
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Deploy to GitHub Pages
