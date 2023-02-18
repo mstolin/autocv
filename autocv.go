@@ -98,6 +98,11 @@ func genDestinationPath(destDir, filename string) (string, error) {
 	return filepath.Join(destDir, fmt.Sprintf("%s.tex", filename)), err
 }
 
+/// Returns only the name of the given config file
+func splitFilename(configFile string) string {
+	return configFile[:len(configFile)-len(filepath.Ext(configFile))]
+}
+
 func main() {
 	// required CLI flags
 	templatePath := flag.String("template", "", "The Latex template.")
@@ -138,13 +143,10 @@ func main() {
 			fmt.Println(err)
 			os.Exit(1)
 		}
-		if templateData.Filename == "" {
-			fmt.Println("The property filename must be set.")
-			os.Exit(1)
-		}
+		filename := splitFilename(configPath)
 
 		// Parse template
-		destination, err := genDestinationPath(*outputPath, templateData.Filename)
+		destination, err := genDestinationPath(*outputPath, filename)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
