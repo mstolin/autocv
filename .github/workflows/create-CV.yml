@@ -1,4 +1,4 @@
-name: build
+name: create-CV
 on: [push]
 jobs:
   build-cli:
