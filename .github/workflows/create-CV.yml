@@ -46,12 +46,16 @@ jobs:
         uses: dante-ev/latex-action@latest
         with:
           root_file: CV-short.tex
-          compiler: pdflatex
+          compiler: pdflate
+      - name: Create a plain HTML file
+        run: touch index.html && echo "<h1>Servus</h1>" > index.html
       - name: Upload PDF as artifact
         uses: actions/upload-artifact@v3
         with:
           name: github-pages
-          path: ./*.pdf
+          path: |
+            ./index.html
+            ./*.pdf
   deploy-gh:
     runs-on: ubuntu-latest
     needs: render-pdf
