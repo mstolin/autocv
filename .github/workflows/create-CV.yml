@@ -17,7 +17,7 @@ jobs:
   #          path: ./autocv
   create-tex-doc:
     runs-on: ubuntu-latest
-    needs: build-cli
+    #needs: build-cli
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
