@@ -1,5 +1,8 @@
 name: create-CV
-on: [push]
+on: 
+  push:
+    branches:
+      - master
 jobs:
   build-cli:
     runs-on: ubuntu-latest
@@ -54,6 +57,7 @@ jobs:
         with:
           name: github-pages
           path: |
+            ./*.pdf
             ./index.html
   deploy-gh:
     runs-on: ubuntu-latest
@@ -65,6 +69,17 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+      - name: Download github-pages artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: github-pages
+          path: ./github-pages
+      - name: Publish to GitHub Pages
+        uses: tsunematsu21/actions-publish-gh-pages@latest
+        with:
+          dir: ./github-pages
+          branch: github-pages
+          token: ${{ secrets.ACCESS_TOKEN }}
+      #- name: Deploy to GitHub Pages
+      #  id: deployment
+      #  uses: actions/deploy-pages@v1
