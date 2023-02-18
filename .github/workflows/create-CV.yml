@@ -1,7 +1,7 @@
 name: create-CV
 on: 
   push:
-    branches: [$default-branch]
+    branches: [main]
 jobs:
   build-cli:
     runs-on: ubuntu-latest
