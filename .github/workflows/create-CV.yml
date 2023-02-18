@@ -75,7 +75,7 @@ jobs:
           name: github-pages
           path: ./github-pages
       - name: Publish to GitHub Pages
-        uses: tsunematsu21/actions-publish-gh-pages@latest
+        uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
         with:
           dir: ./github-pages
           branch: github-pages
