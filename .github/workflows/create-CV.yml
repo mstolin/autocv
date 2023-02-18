@@ -1,8 +1,7 @@
 name: create-CV
 on: 
   push:
-    branches:
-      - main
+    branches: [$default-branch]
 jobs:
   build-cli:
     runs-on: ubuntu-latest
@@ -50,10 +49,14 @@ jobs:
         with:
           root_file: CV-short.tex
           compiler: pdflatex
-      - name: Upload PDF as artifact
-        uses: actions/upload-artifact@v3
+      #- name: Upload PDF as artifact
+      #  uses: actions/upload-artifact@v3
+      #  with:
+      #    name: github-pages
+      #    path: ./*.pdf
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          name: github-pages
           path: ./*.pdf
   deploy-gh:
     runs-on: ubuntu-latest
@@ -76,6 +79,11 @@ jobs:
       #    dir: ./github-pages
       #    branch: github-pages
       #    token: ${{ secrets.ACCESS_TOKEN }}
+      #- name: Deploy to GitHub Pages
+      #  id: deployment
+      #  uses: actions/deploy-pages@v1
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
