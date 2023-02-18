@@ -39,6 +39,11 @@ type TemplateData struct {
 	Sections    []Section
 }
 
+const HELP_INFO = "Latex document parser\n\n" +
+	"USAGE:\n" +
+	"  autocv [OPTIONS] [CONFIG]...\n\n" +
+	"OPTIONS:\n"
+
 // Reads a file from the given path.
 func readFile(path string) ([]byte, error) {
 	fileInfo, err := os.Stat(path)
@@ -95,45 +100,60 @@ func genDestinationPath(destDir, filename string) (string, error) {
 
 func main() {
 	// required CLI flags
-	dataPath := flag.String("data", "", "Path to the data file.")
-	templatePath := flag.String("template", "", "Path to the template file.")
-	outputPath := flag.String("output", "", "Output path.")
+	templatePath := flag.String("template", "", "The Latex template.")
+	outputPath := flag.String("outputDir", ".", "Output directory.")
+	help := flag.Bool("help", false, "Print help information")
 	flag.Parse()
+	configs := flag.Args()
 
-	// all flags are required
-	if *dataPath == "" || *templatePath == "" || *outputPath == "" {
+	if *help {
+		fmt.Print(HELP_INFO)
 		flag.PrintDefaults()
+		os.Exit(0)
+	}
+
+	// at leas one data file must be given
+	if len(configs) < 1 {
+		fmt.Println("At least one config file must be given.")
 		os.Exit(1)
 	}
 
-	// read YAML data
-	data, err := readFile(*dataPath)
-	if err != nil {
-		fmt.Println(err)
+	// template is requires
+	if *templatePath == "" {
+		fmt.Println("No template given.")
 		os.Exit(1)
 	}
 
-	// Unmarshal json data
-	var templateData TemplateData
-	if err := json.Unmarshal(data, &templateData); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	if templateData.Filename == "" {
-		fmt.Println("The property filename must be set.")
-		os.Exit(1)
-	}
+	for _, configPath := range configs {
+		// read json
+		data, err := readFile(configPath)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
 
-	// Parse template
-	destination, err := genDestinationPath(*outputPath, templateData.Filename)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+		// Unmarshal json data
+		var templateData TemplateData
+		if err := json.Unmarshal(data, &templateData); err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		if templateData.Filename == "" {
+			fmt.Println("The property filename must be set.")
+			os.Exit(1)
+		}
 
-	// Write latex document
-	if err := renderTemplate(*templatePath, destination, templateData); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		// Parse template
+		destination, err := genDestinationPath(*outputPath, templateData.Filename)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
+		// Write latex document
+		if err := renderTemplate(*templatePath, destination, templateData); err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
 	}
 }
