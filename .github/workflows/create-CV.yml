@@ -65,17 +65,20 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Download github-pages artifact
-        uses: actions/download-artifact@v3
+      #- name: Download github-pages artifact
+      #  uses: actions/download-artifact@v3
+      #  with:
+      #    name: github-pages
+      #    path: ./github-pages
+      #- name: Publish to GitHub Pages
+      #  uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
+      #  with:
+      #    dir: ./github-pages
+      #    branch: github-pages
+      #    token: ${{ secrets.ACCESS_TOKEN }}
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
         with:
-          name: github-pages
-          path: ./github-pages
-      - name: Publish to GitHub Pages
-        uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
-        with:
-          dir: ./github-pages
-          branch: github-pages
           token: ${{ secrets.ACCESS_TOKEN }}
-      #- name: Deploy to GitHub Pages
-      #  id: deployment
-      #  uses: actions/deploy-pages@v1
+
