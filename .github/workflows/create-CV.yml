@@ -9,7 +9,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Create .tex file
-        run: go run autocv.go --template ./resume.tex.template data.json data_de.json
+        run: go run autocv.go --template ./resume.tex.template resume.json lebenslauf.json
       - name: Upload latex document as artifact
         uses: actions/upload-artifact@v3
         with:
