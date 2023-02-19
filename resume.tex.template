@@ -19,7 +19,7 @@
 {{- end}}
 \begin{document}
 
-{{- range .Sections}}
+{{range .Sections}}
 \begin{rSection}{{`{`}}{{if .Title}}{{.Title}}{{end}}{{`}`}}
 {{ $DATA_LEN := len .Data}}
 {{- range $i, $_ := .Data}}
@@ -59,5 +59,5 @@
 {{- end}}
 {{- end}}
 \end{rSection}
-{{- end}}
+{{end}}
 \end{document}
