@@ -65,9 +65,26 @@ func readFile(path string) ([]byte, error) {
 	return data, nil
 }
 
+/// Simply a - b
+func minus(a, b int) int {
+	return a - b
+}
+
+/// Returns custom functions for the template
+func getCustomFuncs() template.FuncMap {
+	return template.FuncMap{
+		"minus": minus,
+	}
+}
+
 /// Renders the given data into the template
 func renderTemplate(templatePath, destination string, data TemplateData) error {
-	template, err := template.ParseFiles(templatePath)
+	content, err := ioutil.ReadFile(templatePath)
+	if err != nil {
+		return err
+	}
+	customFuncs := getCustomFuncs()
+	tmpl, err := template.New("resume").Funcs(customFuncs).Parse(string(content))
 	if err != nil {
 		return err
 	}
@@ -75,7 +92,7 @@ func renderTemplate(templatePath, destination string, data TemplateData) error {
 	if err != nil {
 		return err
 	}
-	if err := template.Execute(outputFile, data); err != nil {
+	if err := tmpl.Execute(outputFile, data); err != nil {
 		return err
 	}
 	outputFile.Close()
@@ -145,7 +162,7 @@ func main() {
 		}
 		filename := splitFilename(configPath)
 
-		// Parse template
+		// Parse template name
 		destination, err := genDestinationPath(*outputPath, filename)
 		if err != nil {
 			fmt.Println(err)
