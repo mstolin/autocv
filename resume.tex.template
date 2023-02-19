@@ -3,20 +3,25 @@
 \newcommand{\tab}[1]{\hspace{.2667\textwidth}\rlap{#1}} 
 \newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
 {{if .Title}}\name{ {{.Title}} }{{end}}
-{{- range .Information}}
+{{ $INFO_LEN := len .Information}}
+{{- if .Information}}
+\address{
+{{- range $i, $_ := .Information}}
 {{- if and .Text .Url}}
-\address{\href{ {{.Url}} }{ {{.Text}} }}
+\href{ {{.Url}} }{ {{.Text}} }{{if lt $i (minus $INFO_LEN 1)}} \\{{end}}
 {{- else if and .Text (not .Url)}}
-\address{ {{.Text}} }
+{{.Text}}{{if lt $i (minus $INFO_LEN 1)}} \\{{end}}
 {{- else if and .Url (not .Text)}}
-\address{\href{ {{.Url}} }{ {{.Url}} }}
+\href{ {{.Url}} }{ {{.Url}} }{{if lt $i (minus $INFO_LEN 1)}} \\{{end}}
 {{- end}}
+{{- end}}
+}
 {{- end}}
 \begin{document}
 
 {{- range .Sections}}
 \begin{rSection}{ {{if .Title}}{{.Title}}{{end}} }
-{{ $LEN := len .Data}}
+{{ $DATA_LEN := len .Data}}
 {{- range $i, $_ := .Data}}
 {{- if eq .Layout "experience"}}
 {\bf {{.Title}} } \hfill { {{if .Date}} {{.Date}} {{end}} }\\
@@ -30,15 +35,15 @@
 \end{itemize}
 {{- end}}
 {{- else if eq .Layout "skill"}}
-{{- if eq $i 1}}
+{{- if eq $i 0}}
 \begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
 {{- end}}
 {{if .Title}}{{.Title}}{{end}} {{if .Text}}{{range .Text}}& {{.}} \\{{end}}{{end}}
-{{- if eq $i $LEN}}
+{{- if eq $i (minus $DATA_LEN 1)}}
 \end{tabular}\\
 {{- end}}
 {{- else if eq .Layout "paragraph"}}
-{{- if eq $i 1}}
+{{- if eq $i 0}}
 \vspace{-1.25em}
 {{- end}}
 \item {{if .Title}}\textbf{ {{.Title}} }{{end}} {--- {{if .Text}}{{range .Text}}{{.}} {{end}}{{end}}}
