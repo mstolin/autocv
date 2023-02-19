@@ -3,35 +3,56 @@
 \newcommand{\tab}[1]{\hspace{.2667\textwidth}\rlap{#1}} 
 \newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
 {{if .Title}}\name{ {{.Title}} }{{end}}
-{{range .Information}}
-\address{ {{if .Text}}{{.Text}}{{end}} }
-{{end}}
+{{- range .Information}}
+{{- if and .Text .Url}}
+\address{\href{ {{.Url}} }{ {{.Text}} }}
+{{- else if and .Text (not .Url)}}
+\address{ {{.Text}} }
+{{- else if and .Url (not .Text)}}
+\address{\href{ {{.Url}} }{ {{.Url}} }}
+{{- end}}
+{{- end}}
 \begin{document}
 
-{{range .Sections}}
+{{- range .Sections}}
 \begin{rSection}{ {{if .Title}}{{.Title}}{{end}} }
-{{range .Data}}
-{{if eq .Layout "experience"}}
+{{ $LEN := len .Data}}
+{{- range $i, $_ := .Data}}
+{{- if eq .Layout "experience"}}
 {\bf {{.Title}} } \hfill { {{if .Date}} {{.Date}} {{end}} }\\
 {{if .Subtitle}}{{.Subtitle}}{{end}} {{if .Location}}\hfill \textit{ {{.Location}} }{{end}}
-{{if .Text}}
+{{- if .Text}}
 \begin{itemize}
 \itemsep -3pt {} 
-{{range .Text}}
+{{- range .Text}}
 \item {{.}}
-{{end}}
+{{- end}}
 \end{itemize}
-{{end}}
-{{else if eq .Layout "skill"}}
+{{- end}}
+{{- else if eq .Layout "skill"}}
+{{- if eq $i 1}}
 \begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
-{{if .Title}}{{.Title}}{{end}} {{if .Text}}{{range .Text}}& {{.}} \\{{end}}{{end}}\\
+{{- end}}
+{{if .Title}}{{.Title}}{{end}} {{if .Text}}{{range .Text}}& {{.}} \\{{end}}{{end}}
+{{- if eq $i $LEN}}
 \end{tabular}\\
-{{else if eq .Layout "paragraph"}}
+{{- end}}
+{{- else if eq .Layout "paragraph"}}
+{{- if eq $i 1}}
 \vspace{-1.25em}
+{{- end}}
 \item {{if .Title}}\textbf{ {{.Title}} }{{end}} {--- {{if .Text}}{{range .Text}}{{.}} {{end}}{{end}}}
-{{if .Link}}\newline {{if .Link.Text}}\href{ {{.Link.Url}} }{ {{.Link.Text}} }{{else}}\href{ {{.Link.Url}} }{ {{.Link.Url}} }{{end}}{{end}}
-{{end}}
-{{end}}
+{{- if .Link}}
+{{- if and .Link.Text .Link.Url}}
+\newline \href{ {{.Link.Url}} }{ {{.Link.Text}} }
+{{- else if and .Link.Url (not .Link.Text)}}
+\newline \href{ {{.Link.Url}} }{ {{.Link.Url}} }
+{{- else if and .Link.Text (not .Link.Url)}}
+\newline {{.Link.Text}}
+{{- end}}
+{{- end}}
+{{- end}}
+{{- end}}
 \end{rSection}
-{{end}}
+{{- end}}
 \end{document}
