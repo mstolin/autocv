@@ -1,97 +1,61 @@
 # TL;TR
 
-This is a tool to automatically generate a CV from YAML data. The goal of this
-project is to be simple and elegant to use. It also follows an opinioned
-style for CVs, however, it can be customized as wished.
+This is a tool to automatically generate a CV from JSON data. The goal of this
+project is to be simple and elegant to use. The existing template follows an 
+opinioned style for CVs, however, it can be customized as wished.
 
--   CV as simple as possible and meaningful, easy to read
--   To stay language-independent, no text will be added beside the one that is define in the yaml file
+# Structure
+
+This project consists of a tool called `autocv` and a GitHub actions pipeline.
+
+The tool is supposed to generate .tex files by inserting given data into a
+template. A example template is [resume.tex.template](./resume.tex.template).
+It uses [Go template](https://pkg.go.dev/text/template) for inserting the data
+into the template.
+
+The pipeline is responsible for 1) generate .tex files using `autocv`, 2)
+compiling the generated .tex files into .pdf files, 3) uploading the compiled
+PDFs to github-pages. Afterwards, you can find your CV at 
+`https://USER.github.io/REPO/CV.pdf`. You can find an example at 
+https://mstolin.github.io/autocv/resume.pdf.
 
 # Usage
+
+Just fork the repo and change define your CV in a JSON file. After you push to 
+the main branch, the [create-CV](./.github/workflows/create-CV.yml) actions
+triggers automatically and publishes the compiled pdf file to github-pages.
 
 ## Data Structure
 
 You have the freedom to define the structure of your CV as you prefer. Meaning,
 that you are free to rename and rearrange section as you like.
 
-A structure for a standard CV may look like the following:
+Data is defined in JSON format. See [resume.json](./resume.json) for a complete 
+example.
 
-```yaml
-# Meta informations
-filename: "CV-short" # Will be saved as CV-short.pdf
-filetitle: "Marcel Stolin CV"
+## Manual Usage
 
-# Title of your CV, probably your name
-title: "Marcel Stolin"
+If you want to manually use the `autocv` too, you have to build it first.
 
-# For example contact information, can contain URIs
-information:
-  - text: "(+49)12345678"
-    url: "tel://+4912345678"
-  - text: "marcel@my-cv.com"
-    url: "mailto://marcel@my-cv.com"
-  - text: "LinkedIn"
-    url: "..."
-  - text: "Github"
-    url: "..."
-
-# Sections you want to render
-sections:
-  - title: "Education"
-    data:
-      - title: "University of Trento"
-        subtitle: "Master of Science --- Computer Science"
-        date: "2021 - 2023 (expected)"
-        text:
-          - "Current Grade: ..."
-          - "Relevant Coursework: ..."
-        layout: "experience"
-  - title: "Recent Work Experience"
-    data:
-      - title: "Fraunhofer IPA"
-        subtitle: "Research Assistant"
-        place: "Stuttgart, Germany"
-        date: "Sep 2020 - Jun 2021"
-        text:
-          - "I achieved this by doing that"
-          - "..."
-        layout: "experience"
-  - title: "Skills"
-    data:
-      - title: "Programming Languages:"
-        text: "Rust, Go, Java"
-        layout: "skill"
-  - title: "Projects"
-    data:
-      - title: "Super cool project"
-        date: "2023"
-        text: "I did a lot of cool stuff and learned a lot as well."
-        link:
-          text: "(Available at github.com/mstolin/Auto-CV)"
-          url: "https://github.com/mstolin/Auto-CV"
-        layout: "paragraph"
+```shell
+$ go build autocv.go
 ```
 
-The data structure follows a couple of rules.
+After that you can use the tool as the following:
 
--   A single `data` entry structure consists of `title`, `date`, `text`, `link`,
-    and `style`. The style attribute defines how the data is rendered in the
-    section.
--   Whatever is not defined is not being rendered. This means that nothing depends
-    on each other. For example, if a `date` is not defined it wont be rendered on
-    the PDF file.
--   Text can be a list or just plain text. If it is a list, then a linebreak is
-    added after each row. Further, the style may decide if instead linebreaks,
-    bullet-points are being used.
--   A link is either constructed using `text` and a `url` property, or just using
-    a url. Then, the url is alo used as the link text. For simplification, a link
-    can then be defined as `link: "https://..."`.
+```shell
+$ ./autocv -template resume.tex.template -output output/ resume.json resume-de.json resume-fr.json
+```
 
-## Custom Templates
+Also refer to `autocv -help` for more information. The autocv tool can create
+multiple .tex files from different data using the same template. This is useful
+if you want to have the same CV in different languages. The output is optional,
+by default it is `.`.
 
-The tool can work with every template it is given. The requirements are, that it
-is a valid mustache template and follows the data structure defined in the
-[Data Structure section](#data-structure).
+# Templates
+
+The tool can work with every valid template it is given. Refer to the
+[Go template package](https://pkg.go.dev/text/template) for documentation.
 
 # Credits
 
