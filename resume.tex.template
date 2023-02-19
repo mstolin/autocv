@@ -2,17 +2,17 @@
 \usepackage[left=0.4 in,top=0.4in,right=0.4 in,bottom=0.4in]{geometry}
 \newcommand{\tab}[1]{\hspace{.2667\textwidth}\rlap{#1}} 
 \newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
-{{if .Title}}\name{ {{.Title}} }{{end}}
+{{if .Title}}\name{{`{`}}{{.Title}}{{`}`}}{{end}}
 {{ $INFO_LEN := len .Information}}
 {{- if .Information}}
 \address{
 {{- range $i, $_ := .Information}}
 {{- if and .Text .Url}}
-\href{ {{.Url}} }{ {{.Text}} }{{if lt $i (minus $INFO_LEN 1)}} \\{{end}}
+\href{{`{`}}{{.Url}}{{`}`}}{{`{`}}{{.Text}}{{`}`}}{{if lt $i (minus $INFO_LEN 1)}} \\{{end}}
 {{- else if and .Text (not .Url)}}
 {{.Text}}{{if lt $i (minus $INFO_LEN 1)}} \\{{end}}
 {{- else if and .Url (not .Text)}}
-\href{ {{.Url}} }{ {{.Url}} }{{if lt $i (minus $INFO_LEN 1)}} \\{{end}}
+\href{{`{`}}{{.Url}}{{`}`}}{{`{`}}{{.Url}}{{`}`}}{{if lt $i (minus $INFO_LEN 1)}} \\{{end}}
 {{- end}}
 {{- end}}
 }
@@ -20,12 +20,12 @@
 \begin{document}
 
 {{- range .Sections}}
-\begin{rSection}{ {{if .Title}}{{.Title}}{{end}} }
+\begin{rSection}{{`{`}}{{if .Title}}{{.Title}}{{end}}{{`}`}}
 {{ $DATA_LEN := len .Data}}
 {{- range $i, $_ := .Data}}
 {{- if eq .Layout "experience"}}
-{\bf {{.Title}} } \hfill { {{if .Date}} {{.Date}} {{end}} }\\
-{{if .Subtitle}}{{.Subtitle}}{{end}} {{if .Location}}\hfill \textit{ {{.Location}} }{{end}}
+{\bf {{.Title}}} \hfill{{`{`}}{{if .Date}}{{.Date}}{{end}}{{`}`}}\\
+{{if .Subtitle}}{{.Subtitle}}{{end}} {{if .Location}}\hfill \textit{{`{`}}{{.Location}}{{`}`}}{{end}}
 {{- if .Text}}
 \begin{itemize}
 \itemsep -3pt {} 
@@ -46,12 +46,12 @@
 {{- if eq $i 0}}
 \vspace{-1.25em}
 {{- end}}
-\item {{if .Title}}\textbf{ {{.Title}} }{{end}} {--- {{if .Text}}{{range .Text}}{{.}} {{end}}{{end}}}
+\item {{if .Title}}\textbf{{`{`}}{{.Title}}{{`}`}}{{end}} {--- {{if .Text}}{{range .Text}}{{.}} {{end}}{{end}}}
 {{- if .Link}}
 {{- if and .Link.Text .Link.Url}}
-\newline \href{ {{.Link.Url}} }{ {{.Link.Text}} }
+\newline \href{{`{`}}{{.Link.Url}}{{`}`}}{{`{`}}{{.Link.Text}}{{`}`}}
 {{- else if and .Link.Url (not .Link.Text)}}
-\newline \href{ {{.Link.Url}} }{ {{.Link.Url}} }
+\newline \href{{`{`}}{{.Link.Url}}{{`}`}}{{`{`}}{{.Link.Url}}{{`}`}}
 {{- else if and .Link.Text (not .Link.Url)}}
 \newline {{.Link.Text}}
 {{- end}}
