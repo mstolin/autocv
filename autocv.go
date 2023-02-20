@@ -13,7 +13,7 @@ import (
 
 type Link struct {
 	Text string
-	Url  string
+	URL  string
 }
 
 type Data struct {
@@ -32,14 +32,12 @@ type Section struct {
 }
 
 type TemplateData struct {
-	Filename    string
-	Filetitle   string
 	Title       string
 	Information []Link
 	Sections    []Section
 }
 
-const HELP_INFO = "Latex document parser\n\n" +
+const helpInfo = "Latex document parser\n\n" +
 	"USAGE:\n" +
 	"  autocv [OPTIONS] [CONFIG]...\n\n" +
 	"OPTIONS:\n"
@@ -65,19 +63,19 @@ func readFile(path string) ([]byte, error) {
 	return data, nil
 }
 
-/// Simply a - b
+// Simply a - b
 func minus(a, b int) int {
 	return a - b
 }
 
-/// Returns custom functions for the template
+// Returns custom functions for the template
 func getCustomFuncs() template.FuncMap {
 	return template.FuncMap{
 		"minus": minus,
 	}
 }
 
-/// Renders the given data into the template
+// Renders the given data into the template
 func renderTemplate(templatePath, destination string, data TemplateData) error {
 	content, err := ioutil.ReadFile(templatePath)
 	if err != nil {
@@ -99,7 +97,7 @@ func renderTemplate(templatePath, destination string, data TemplateData) error {
 	return nil
 }
 
-/// Generates the destination file for the tex document
+// Generates the destination file for the tex document
 func genDestinationPath(destDir, filename string) (string, error) {
 	fileInfo, err := os.Stat(destDir)
 	if err != nil {
@@ -115,7 +113,7 @@ func genDestinationPath(destDir, filename string) (string, error) {
 	return filepath.Join(destDir, fmt.Sprintf("%s.tex", filename)), err
 }
 
-/// Returns only the name of the given config file
+// Returns only the name of the given config file
 func splitFilename(configFile string) (string, error) {
 	if configFile == "" {
 		return "", fmt.Errorf("configFile '%s' can't be empty", configFile)
@@ -133,7 +131,7 @@ func main() {
 	configs := flag.Args()
 
 	if *help {
-		fmt.Print(HELP_INFO)
+		fmt.Print(helpInfo)
 		flag.PrintDefaults()
 		os.Exit(0)
 	}
