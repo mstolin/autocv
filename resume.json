@@ -13,7 +13,7 @@
     "sections": [
         {
             "title": "Education",
-            "data": [
+            "content": [
                 {
                     "title": "Master of Science, Computer Science",
                     "subtitle": "University of Trento",
@@ -38,7 +38,7 @@
         },
         {
             "title": "Recent Work Experience",
-            "data": [
+            "content": [
                 {
                     "title": "Research Assistant",
                     "subtitle": "Fraunhofer IPA",
@@ -76,7 +76,7 @@
         },
         {
             "title": "Skills",
-            "data": [
+            "content": [
                 {
                     "title": "Programming Languages:",
                     "text": ["Rust, Go, Java"],
@@ -101,7 +101,7 @@
         },
         {
             "title": "Projects",
-            "data": [
+            "content": [
                 {
                     "title": "Computing within Limits 2022 (Conference)",
                     "date": "2023",

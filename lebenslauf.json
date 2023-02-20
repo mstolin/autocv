@@ -13,7 +13,7 @@
     "sections": [
         {
             "title": "Bildung",
-            "data": [
+            "content": [
                 {
                     "title": "Master of Science, Computer Science",
                     "subtitle": "University of Trento",
@@ -28,7 +28,7 @@
         },
         {
             "title": "Berufserfahrung",
-            "data": [
+            "content": [
                 {
                     "title": "Research Assistant",
                     "subtitle": "Fraunhofer IPA",
@@ -44,7 +44,7 @@
         },
         {
             "title": "Faehigkeiten",
-            "data": [
+            "content": [
                 {
                     "title": "Programming Languages:",
                     "text": ["Rust, Go, Java"],
@@ -54,7 +54,7 @@
         },
         {
             "title": "Projekte",
-            "data": [
+            "content": [
                 {
                     "title": "Super cool project",
                     "date": "2023",
