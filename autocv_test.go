@@ -82,7 +82,9 @@ func TestRenderTemplate(t *testing.T) {
 	data.Title = "Test"
 
 	var out bytes.Buffer
-	tmpl.Execute(&out, data)
+	if err = tmpl.Execute(&out, data); err != nil {
+		t.Errorf("FAIL renderTemplate: %e", err)
+	}
 	got := out.String()
 	expect := "Test=4"
 	if got != expect {

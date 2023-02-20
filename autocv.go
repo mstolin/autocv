@@ -17,7 +17,7 @@ type Link struct {
 	URI  string
 }
 
-// Data represents the data that is getting inserted
+// Content represents the data that is getting inserted
 // as content in a section
 type Content struct {
 	Title    string
