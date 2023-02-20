@@ -22,7 +22,7 @@ jobs:
         with:
           version: "2022.1.1"
           install-go: false
-      - name: Lint using golint
+      - name: Lint
         uses: golangci/golangci-lint-action@v3
         with:
           version: latest

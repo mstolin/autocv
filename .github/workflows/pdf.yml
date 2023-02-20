@@ -1,4 +1,4 @@
-name: create-CV
+name: create-PDF
 on: 
   push:
     branches: [main]
@@ -9,14 +9,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Create .tex file
-        run: go run autocv.go --template ./resume.tex.template resume.json lebenslauf.json
+        run: go run autocv.go -template ./resume.tex.template resume.json lebenslauf.json
       - name: Upload latex document as artifact
         uses: actions/upload-artifact@v3
         with:
           name: latex-documents
           path: |
             ./*.tex
-            ./resume.cls
+            ./*.cls
   render-pdf:
     runs-on: ubuntu-latest
     container: danteev/texlive:latest
