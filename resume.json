@@ -3,11 +3,11 @@
     "information": [
         {
             "text": "linkedin.com/in/marcelstolin",
-            "url": "https://linkedin.com/in/marcelstolin"
+            "uri": "https://linkedin.com/in/marcelstolin"
         },
         {
             "text": "github.com/mstolin",
-            "url": "https://github.com/mstolin"
+            "uri": "https://github.com/mstolin"
         }
     ],
     "sections": [
@@ -108,7 +108,7 @@
                     "text": ["Co-authored \\textit{\"Conceptualising Resources-aware Higher Education Digital Infrastructure through Self-hosting: a Multi-disciplinary View\"} where I researched cloud technologies with a low energy-footprint."],
                     "link": {
                         "text": "(Available at computingwithinlimits.org/2022/papers/limits22-final-Angeli.pdf)",
-                        "url": "https://computingwithinlimits.org/2022/papers/limits22-final-Angeli.pdf"
+                        "uri": "https://computingwithinlimits.org/2022/papers/limits22-final-Angeli.pdf"
                     },
                     "layout": "paragraph"
                 },
@@ -118,7 +118,7 @@
                     "text": ["Built a web application in Go and Python using the microservice architecture, that scraps Amazon wishlists."],
                     "link": {
                         "text": "(Available at github.com/mstolin/wishlist-inviter)",
-                        "url": "https://github.com/mstolin/wishlist-inviter"
+                        "uri": "https://github.com/mstolin/wishlist-inviter"
                     },
                     "layout": "paragraph"
                 }

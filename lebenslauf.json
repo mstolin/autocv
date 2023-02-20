@@ -3,11 +3,11 @@
     "information": [
         {
             "text": "LinkedIn",
-            "url": "..."
+            "uri": "..."
         },
         {
             "text": "Github",
-            "url": "..."
+            "uri": "..."
         }
     ],
     "sections": [
@@ -61,7 +61,7 @@
                     "text": ["I did a lot of cool stuff and learned a lot as well."],
                     "link": {
                         "text": "(Available at github.com/mstolin/Auto-CV)",
-                        "url": "https://github.com/mstolin/Auto-CV"
+                        "uri": "https://github.com/mstolin/Auto-CV"
                     },
                     "layout": "paragraph"
                 }
