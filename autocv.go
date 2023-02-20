@@ -14,12 +14,12 @@ import (
 // Link represents a link
 type Link struct {
 	Text string
-	URL  string
+	URI  string
 }
 
-// Data represents the data that is getting inserted
+// Content represents the data that is getting inserted
 // as content in a section
-type Data struct {
+type Content struct {
 	Title    string
 	Subtitle string
 	Location string
@@ -31,8 +31,8 @@ type Data struct {
 
 // Section represents a section
 type Section struct {
-	Title string
-	Data  []Data
+	Title   string
+	Content []Content
 }
 
 // TemplateData represents the resume
@@ -80,25 +80,13 @@ func getCustomFuncs() template.FuncMap {
 }
 
 // Renders the given data into the template
-func renderTemplate(templatePath, destination string, data TemplateData) error {
-	content, err := ioutil.ReadFile(templatePath)
-	if err != nil {
-		return err
-	}
+func renderTemplate(templateContent string) (*template.Template, error) {
 	customFuncs := getCustomFuncs()
-	tmpl, err := template.New("resume").Funcs(customFuncs).Parse(string(content))
+	tmpl, err := template.New("resume").Funcs(customFuncs).Parse(templateContent)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	outputFile, err := os.Create(destination)
-	if err != nil {
-		return err
-	}
-	if err := tmpl.Execute(outputFile, data); err != nil {
-		return err
-	}
-	outputFile.Close()
-	return nil
+	return tmpl, nil
 }
 
 // Generates the destination file for the tex document
@@ -179,9 +167,25 @@ func main() {
 		}
 
 		// Write latex document
-		if err := renderTemplate(*templatePath, destination, templateData); err != nil {
+		templateContent, err := ioutil.ReadFile(*templatePath)
+		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
+		tmpl, err := renderTemplate(string(templateContent))
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		outputFile, err := os.Create(destination)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		if err := tmpl.Execute(outputFile, templateData); err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		outputFile.Close()
 	}
 }

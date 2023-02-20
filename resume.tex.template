@@ -21,8 +21,8 @@
 
 {{range .Sections}}
 \begin{rSection}{{`{`}}{{if .Title}}{{.Title}}{{end}}{{`}`}}
-{{ $DATA_LEN := len .Data}}
-{{- range $i, $_ := .Data}}
+{{ $CONTENT_LEN := len .Content}}
+{{- range $i, $_ := .Content}}
 {{- if eq .Layout "experience"}}
 {\bf {{.Title}}} \hfill{{`{`}}{{if .Date}}{{.Date}}{{end}}{{`}`}}\\
 {{if .Subtitle}}{{.Subtitle}}{{end}} {{if .Location}}\hfill \textit{{`{`}}{{.Location}}{{`}`}}{{end}}
@@ -39,7 +39,7 @@
 \begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
 {{- end}}
 {{if .Title}}{{.Title}}{{end}} {{if .Text}}{{range .Text}}& {{.}} \\{{end}}{{end}}
-{{- if eq $i (minus $DATA_LEN 1)}}
+{{- if eq $i (minus $CONTENT_LEN 1)}}
 \end{tabular}\\
 {{- end}}
 {{- else if eq .Layout "paragraph"}}
