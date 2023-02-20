@@ -1,5 +1,12 @@
 name: CI
-on: ["push", "pull_request"]
+on:
+  pull_request:
+    branches: ["main"]
+    paths-ignore:
+      - "*.json"
+      - "*.md"
+      - "*.template"
+      - "*.cls"
 jobs:
   ci:
     strategy:
