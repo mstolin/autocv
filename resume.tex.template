@@ -7,12 +7,12 @@
 {{- if .Information}}
 \address{
 {{- range $i, $_ := .Information}}
-{{- if and .Text .URL}}
-\href{{`{`}}{{.URL}}{{`}`}}{{`{`}}{{.Text}}{{`}`}}{{if lt $i (minus $INFO_LEN 1)}} \\{{end}}
-{{- else if and .Text (not .URL)}}
+{{- if and .Text .URI}}
+\href{{`{`}}{{.URI}}{{`}`}}{{`{`}}{{.Text}}{{`}`}}{{if lt $i (minus $INFO_LEN 1)}} \\{{end}}
+{{- else if and .Text (not .URI)}}
 {{.Text}}{{if lt $i (minus $INFO_LEN 1)}} \\{{end}}
-{{- else if and .URL (not .Text)}}
-\href{{`{`}}{{.URL}}{{`}`}}{{`{`}}{{.URL}}{{`}`}}{{if lt $i (minus $INFO_LEN 1)}} \\{{end}}
+{{- else if and .URI (not .Text)}}
+\href{{`{`}}{{.URI}}{{`}`}}{{`{`}}{{.URI}}{{`}`}}{{if lt $i (minus $INFO_LEN 1)}} \\{{end}}
 {{- end}}
 {{- end}}
 }
@@ -48,11 +48,11 @@
 {{- end}}
 \item {{if .Title}}\textbf{{`{`}}{{.Title}}{{`}`}}{{end}} {--- {{if .Text}}{{range .Text}}{{.}} {{end}}{{end}}}
 {{- if .Link}}
-{{- if and .Link.Text .Link.URL}}
-\newline \href{{`{`}}{{.Link.URL}}{{`}`}}{{`{`}}{{.Link.Text}}{{`}`}}
-{{- else if and .Link.URL (not .Link.Text)}}
-\newline \href{{`{`}}{{.Link.URL}}{{`}`}}{{`{`}}{{.Link.URL}}{{`}`}}
-{{- else if and .Link.Text (not .Link.URL)}}
+{{- if and .Link.Text .Link.URI}}
+\newline \href{{`{`}}{{.Link.URI}}{{`}`}}{{`{`}}{{.Link.Text}}{{`}`}}
+{{- else if and .Link.URI (not .Link.Text)}}
+\newline \href{{`{`}}{{.Link.URI}}{{`}`}}{{`{`}}{{.Link.URI}}{{`}`}}
+{{- else if and .Link.Text (not .Link.URI)}}
 \newline {{.Link.Text}}
 {{- end}}
 {{- end}}
