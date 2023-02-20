@@ -25,6 +25,6 @@ jobs:
       - name: Lint using golint
         uses: golangci/golangci-lint-action@v3
         with:
-          version: v1.29
+          version: latest
       - name: Run tests
         run: go test -race -vet=off -cover -v ./...
