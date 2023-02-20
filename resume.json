@@ -32,7 +32,7 @@
                     "date": "2016 - 2021",
                     "text": [
                         "Final Grade: 2.0 out of 6.0 (best possible grade: 1.0)",
-                        "Relevant Coursework: Advanced Programming in C++, Algorithms and Data Structures, Artificial Intelligence, Database Systems 1, Functional Programming, Software Development 1 + 2,\\\\ Web Development 1 + 2"
+                        "Relevant Coursework: Advanced Programming in C++, Algorithms and Data Structures, Artificial Intelligence, Database Systems 1, Functional Programming, Software Development 1 + 2, Web Development 1 + 2"
                     ],
                     "layout": "experience"
                 }
@@ -96,7 +96,7 @@
                 },
                 {
                     "title": "Certificates:",
-                    "text": ["Introduction to DevOps and Site Reliability Engineering (edX)", "Machine Learning Engineer Nanodegree (Udacity)"],
+                    "text": ["Introduction to DevOps and Site Reliability Engineering (edX, 2021),", "Machine Learning Engineer Nanodegree (Udacity, 2020)"],
                     "layout": "skill"
                 }
             ]
@@ -107,7 +107,7 @@
                 {
                     "title": "Computing within Limits 2022 (Conference)",
                     "date": "2023",
-                    "text": ["Co-authored \\textit{Conceptualising Resources-aware Higher Education Digital Infrastructure through Self-hosting: a Multi-disciplinary View} where I researched cloud technologies with a low energy-footprint."],
+                    "text": ["Co-authored \\textit{\"Conceptualising Resources-aware Higher Education Digital Infrastructure through Self-hosting: a Multi-disciplinary View\"} where I researched cloud technologies with a low energy-footprint."],
                     "link": {
                         "text": "(Available at computingwithinlimits.org/2022/papers/limits22-final-Angeli.pdf)",
                         "url": "https://computingwithinlimits.org/2022/papers/limits22-final-Angeli.pdf"
