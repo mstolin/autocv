@@ -116,8 +116,12 @@ func genDestinationPath(destDir, filename string) (string, error) {
 }
 
 /// Returns only the name of the given config file
-func splitFilename(configFile string) string {
-	return configFile[:len(configFile)-len(filepath.Ext(configFile))]
+func splitFilename(configFile string) (string, error) {
+	if configFile == "" {
+		return "", fmt.Errorf("configFile '%s' can't be empty", configFile)
+	}
+	filename := configFile[:len(configFile)-len(filepath.Ext(configFile))]
+	return filepath.Base(filename), nil
 }
 
 func main() {
@@ -160,7 +164,11 @@ func main() {
 			fmt.Println(err)
 			os.Exit(1)
 		}
-		filename := splitFilename(configPath)
+		filename, err := splitFilename(configPath)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
 
 		// Parse template name
 		destination, err := genDestinationPath(*outputPath, filename)
