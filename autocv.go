@@ -11,11 +11,14 @@ import (
 	"text/template"
 )
 
+// Link represents a link
 type Link struct {
 	Text string
 	URL  string
 }
 
+// Data represents the data that is getting inserted
+// as content in a section
 type Data struct {
 	Title    string
 	Subtitle string
@@ -26,11 +29,13 @@ type Data struct {
 	Link     Link
 }
 
+// Section represents a section
 type Section struct {
 	Title string
 	Data  []Data
 }
 
+// TemplateData represents the resume
 type TemplateData struct {
 	Title       string
 	Information []Link
@@ -48,9 +53,8 @@ func readFile(path string) ([]byte, error) {
 	if err != nil {
 		if errors.Is(err, os.ErrNotExist) {
 			return nil, fmt.Errorf("path '%s' does not exist", path)
-		} else {
-			return nil, fmt.Errorf("invalid path '%s'", path)
 		}
+		return nil, fmt.Errorf("invalid path '%s'", path)
 	}
 	if fileInfo.IsDir() {
 		return nil, fmt.Errorf("path '%s' is a directory", path)
@@ -103,9 +107,8 @@ func genDestinationPath(destDir, filename string) (string, error) {
 	if err != nil {
 		if errors.Is(err, os.ErrNotExist) {
 			return "", fmt.Errorf("path '%s' does not exist", destDir)
-		} else {
-			return "", fmt.Errorf("invalid path '%s'", destDir)
 		}
+		return "", fmt.Errorf("invalid path '%s'", destDir)
 	}
 	if !fileInfo.IsDir() {
 		return "", fmt.Errorf("path '%s' is not a directory", destDir)
