@@ -14,12 +14,12 @@ import (
 // Link represents a link
 type Link struct {
 	Text string
-	URL  string // todo Call this URI
+	URI  string
 }
 
 // Data represents the data that is getting inserted
 // as content in a section
-type Data struct { // todo call this content
+type Content struct {
 	Title    string
 	Subtitle string
 	Location string
@@ -31,8 +31,8 @@ type Data struct { // todo call this content
 
 // Section represents a section
 type Section struct {
-	Title string
-	Data  []Data // todo also call this content
+	Title   string
+	Content []Content
 }
 
 // TemplateData represents the resume
