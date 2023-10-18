@@ -1,0 +1,111 @@
+{
+    "title": "Marcel Stolin",
+    "information": [
+        {
+            "text": "linkedin.com/in/marcelstolin",
+            "uri": "https://linkedin.com/in/marcelstolin"
+        },
+        {
+            "text": "github.com/mstolin",
+            "uri": "https://github.com/mstolin"
+        }
+    ],
+    "sections": [
+        {
+            "title": "Education",
+            "content": [
+                {
+                    "title": "Master of Science, Computer Science",
+                    "subtitle": "University of Trento",
+                    "date": "2021 - 2024",
+                    "text": [
+                        "Current Grade: 28.82 out of 30.0",
+                        "Passed Courses: Advanced Programming, Autonomous Software Agents, Blockchain, Distributed Systems 1,\\\\ Innovation and Business in ICT, Introduction to Computer and Network Security, Privacy and Intellectual Property Rights, Research Project, Service Design and Engineering, Web Architectures",
+                        "Pending Courses: Advanced Computing, Computability and Computational Complexity, Fog and Cloud Computing, Security Testing"
+                    ],
+                    "layout": "experience"
+                },
+                {
+                    "title": "Bachelor of Science, Mobile Media",
+                    "subtitle": "Stuttgart Media University",
+                    "date": "2016 - 2021",
+                    "text": [
+                        "Final Grade: 2.0 out of 6.0 (best possible grade: 1.0)",
+                        "Relevant Coursework: Advanced Programming in C++, Algorithms and Data Structures, Artificial Intelligence, Database Systems 1, Functional Programming, Software Development 1+2, Web Development 1+2"
+                    ],
+                    "layout": "experience"
+                }
+            ]
+        },
+        {
+            "title": "Research",
+            "content": [
+                {
+                    "title": "(Conference Paper) Computing within Limits 2022",
+                    "date": "2023",
+                    "text": ["Co-authored \\textit{\"Conceptualising Resources-aware Higher Education Digital Infrastructure through Self-hosting: a Multi-disciplinary View\"} where I researched cloud technologies with a low energy-footprint."],
+                    "link": {
+                        "text": "(Available at computingwithinlimits.org/2022/papers/limits22-final-Angeli.pdf)",
+                        "uri": "https://computingwithinlimits.org/2022/papers/limits22-final-Angeli.pdf"
+                    },
+                    "layout": "paragraph"
+                },
+                {
+                    "title": "(Bachelor Thesis) Automated Deployment of Machine Learning Applications on a Scalable Heterogeneous GPU-Accelerated Apache Spark Cluster",
+                    "date": "2021",
+                    "text": ["Bachelor Thesis written at the Fraunhofer IPA in Stuttgart, Germany"],
+                    "link": {
+                        "text": "(Available at github.com/mstolin/Bachelor-Thesis/blob/master/thesis/main.pdf)",
+                        "uri": "https://github.com/mstolin/Bachelor-Thesis/blob/master/thesis/main.pdf"
+                    },
+                    "layout": "paragraph"
+                }
+            ]
+        },
+        {
+            "title": "Recent Work Experience",
+            "content": [
+                {
+                    "title": "Software Engineer (Working Student)",
+                    "subtitle": "ETAS GmbH",
+                    "location": "Stuttgart, Germany",
+                    "date": "Apr 2023 - Present",
+                    "text": [
+                        "Writing Automative Software using Rust and WebAssembly"
+                    ],
+                    "layout": "experience"
+                },
+                {
+                    "title": "Research Assistant",
+                    "subtitle": "Fraunhofer IPA",
+                    "location": "Stuttgart, Germany",
+                    "date": "Sep 2020 - Jun 2021",
+                    "text": [
+                        "Bachelor Thesis and Research on HPC"
+                    ],
+                    "layout": "experience"
+                },
+                {
+                    "title": "Data Engineer (Internship and Working Student)",
+                    "subtitle": "Robert Bosch GmbH, Bosch Center for Artificial Intelligence",
+                    "location": "Renningen, Germany",
+                    "date": "May 2019 - Sep 2020",
+                    "text": [
+                        "Doing mostly automation and implementing DevOps practices"
+                    ],
+                    "layout": "experience"
+                },
+                {
+                    "title": "Data Engineer (Internship)",
+                    "subtitle": "Robert Bosch LLC, Bosch Center for Artificial Intelligence",
+                    "location": "Sunnyvale, CA, USA",
+                    "date": "Oct 2018 - Mar 2019",
+                    "text": [
+                        "Handling Big Data on a large Data Platform"
+                    ],
+                    "layout": "experience"
+                }
+            ]
+        }
+    ]
+}
