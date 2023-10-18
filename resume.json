@@ -17,10 +17,10 @@
                 {
                     "title": "Master of Science, Computer Science",
                     "subtitle": "University of Trento",
-                    "date": "2021 - 2023 (expected)",
+                    "date": "2021 - 2024",
                     "text": [
-                        "Current Grade: 29.25 out of 30.0",
-                        "Relevant Coursework: Advanced Programming, Autonomous Software Agents, Distributed Systems 1,\\\\ Security Testing, Service Design and Engineering, Web Architectures"
+                        "Current Grade: 28.82 out of 30.0",
+                        "Relevant Coursework: Advanced Programming, Autonomous Software Agents, Distributed Systems 1,\\\\ Introduction to Computer and Network Security, Security Testing,\\\\ Service Design and Engineering, Web Architectures"
                     ],
                     "layout": "experience"
                 },
@@ -39,6 +39,16 @@
         {
             "title": "Recent Work Experience",
             "content": [
+                {
+                    "title": "Software Engineer (Working Student)",
+                    "subtitle": "ETAS GmbH",
+                    "location": "Stuttgart, Germany",
+                    "date": "Apr 2023 - Present",
+                    "text": [
+                        "Writing Automative Software using Rust and WebAssembly"
+                    ],
+                    "layout": "experience"
+                },
                 {
                     "title": "Research Assistant",
                     "subtitle": "Fraunhofer IPA",
